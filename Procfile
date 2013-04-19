@@ -1,1 +1,1 @@
-web: gunicorn objectphone:app
+web: newrelic-admin run-program gunicorn objectphone:app
