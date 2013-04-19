@@ -118,7 +118,7 @@ def sms():
 	c = pycurl.Curl()
 	c.setopt(c.URL, 'https://api.collection.cooperhewitt.org/rest')
 	
-	if (obj_id == "random"):
+	if (obj_id.lower() == "random"):
 		d = {'method':'cooperhewitt.objects.getRandom','access_token':api_token}
 	else:
 		d = {'method':'cooperhewitt.objects.getInfo','access_token':api_token, 'id':obj_id}
