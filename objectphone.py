@@ -117,7 +117,12 @@ def sms():
 	buf = cStringIO.StringIO()
 	c = pycurl.Curl()
 	c.setopt(c.URL, 'https://api.collection.cooperhewitt.org/rest')
-	d = {'method':'cooperhewitt.objects.getInfo','access_token':api_token, 'id':obj_id}
+	
+	if (obj_id == "random"):
+		d = {'method':'cooperhewitt.objects.getRandom','access_token':api_token}
+	else:
+		d = {'method':'cooperhewitt.objects.getInfo','access_token':api_token, 'id':obj_id}
+
 	c.setopt(c.WRITEFUNCTION, buf.write)
 	c.setopt(c.POSTFIELDS, urllib.urlencode(d) )
 	c.perform()
@@ -126,6 +131,7 @@ def sms():
 	buf.reset()
 	buf.truncate()
 	object_id = rsp_obj.get('object', [])
+	id_value = object_id.get('id', [])
 	medium = object_id.get('medium', [])
 	title = object_id.get('title', [])
 	
@@ -133,15 +139,15 @@ def sms():
 
 	if (title):
 		phrase = phrase + "I'm called " + title + ". "
+		r.sms(phrase)
 		
 	if (medium):
 		medium_phrase = "My medium is " + medium + ". "
+		r.sms(medium_phrase)
 	
-	url = encode(int(obj_id))
-	url = "To read more about me, click http://cprhw.tt/o/" + str(url)
-	
-	r.sms(phrase)
-	r.sms(medium_phrase)
+	url = encode(int(id_value))
+	url = "To read more about me, click http://cprhw.tt/o/" + url
+		
 	r.sms(url)
 	
 	return str(r)
