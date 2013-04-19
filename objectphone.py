@@ -46,7 +46,7 @@ def handlecall():
 		
 
 @app.route('/object', methods=['GET','POST'])
-def obj():
+def object():
 	obj_id = request.values.get('Digits', None)
 	r = twiml.Response()
 	
@@ -106,10 +106,11 @@ def random():
 	r = twiml.Response()
 	r.say(phrase)
 	r.redirect(url="/end-menu", method="GET")
+	
 	return str(r)
 	
 @app.route('/sms', methods=['GET','POST'])
-def obj():
+def sms():
 	obj_id = request.values.get('Body', None)
 	r = twiml.Response()
 	
