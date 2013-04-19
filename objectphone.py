@@ -14,9 +14,12 @@ app = Flask(__name__)
 def hello():
 	r = twiml.Response()
 	r.say("Welcome to object phone!. ") 
-	with r.gather(numDigits=1, action="initial-handler", method="POST") as g:
-		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID.")
-		g.say("Press 2 to just listen to a random object.")
+	with r.gather(timeout=10, numDigits=1, action="initial-handler", method="POST") as g:
+		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. ")
+		g.say("or, For a random object, press 2. ")
+		
+	r.say("I'm sorry, I missed that, please try again. ")
+	r.redirect(url="/", method="GET")	
 	return str(r)
 	
 @app.route('/initial-handler', methods=['GET','POST'])
@@ -30,7 +33,8 @@ def handlecall():
 	
 	if (digits == "2"):
 		return redirect("/random")
-
+	
+	return "ok"
 		
 
 @app.route('/object', methods=['GET','POST'])
