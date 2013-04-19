@@ -14,7 +14,7 @@ app = Flask(__name__)
 def hello():
 	r = twiml.Response()
 	r.say("Welcome to object phone!. ") 
-	with r.gather(timeout=10, numDigits=1, action="initial-handler", method="POST") as g:
+	with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
 		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. ")
 		g.say("or, For a random object, press 2. ")
 		
@@ -25,16 +25,24 @@ def hello():
 @app.route('/initial-handler', methods=['GET','POST'])
 def handlecall():
 	digits = request.values.get('Digits', None)
+	
 	r = twiml.Response()
+	
 	if (digits == "1"):
-		with r.gather(action="object", method="POST") as g:
+		with r.gather(timeout=10, action="object", method="POST") as g:
 			g.say("Please enter an object ID followed by the pound key.")
+		
+		r.say("I'm sorry, I missed that, please try again. ")
+		r.redirect(url="/initial-handler?Digits=1", method="POST", )
 		return str(r)
 	
 	if (digits == "2"):
-		return redirect("/random")
+		r.redirect(url="/random", method="GET")
+		return str(r)
 	
-	return "ok"
+	r.say("I'm sorry, that choice is invalid, please try again. ")
+	r.redirect(url="/", method="GET")	
+	return str(r)
 		
 
 @app.route('/object', methods=['GET','POST'])
