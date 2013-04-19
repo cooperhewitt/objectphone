@@ -74,6 +74,7 @@ def obj():
 		phrase = phrase + "My medium is " + medium + ". "
 			
 	r.say(phrase)
+	r.redirect(url="/end-menu", method="GET")
 	return str(r)
 
 
@@ -104,10 +105,11 @@ def random():
 	
 	r = twiml.Response()
 	r.say(phrase)
+	r.redirect(url="/end-menu", method="GET")
 	return str(r)
 	
 @app.route('/sms', methods=['GET','POST'])
-def object():
+def obj():
 	obj_id = request.values.get('Body', None)
 	r = twiml.Response()
 	
@@ -142,6 +144,17 @@ def object():
 	r.sms(url)
 	
 	return str(r)
+
+@app.route("/end-menu")
+def endmenu():
+	r = twiml.Response()
+	r.say("Thank you for using object phone. Please stay on the line to return to the main menu.")
+	r.redirect(url="/", method="GET")
+	
+	return str(r)	
+		
+			
+		
 	
 def encode(num):
 	alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ'
