@@ -88,7 +88,7 @@ def sms_help():
     
     phrase = phrase + "You can also text me an object ID number, or an accession number. "
     
-    phrase = phrase + "To see what Micah might say about this, text 'wwms' and to re-read the help just text 'help' at any time. "
+    phrase = phrase + "To see what Micah might say about this, text 'wwms' and to re-read the help just text 'wtf' at any time. "
     
     return phrase
     
