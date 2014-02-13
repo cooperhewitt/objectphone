@@ -2,6 +2,7 @@ import sys
 import os
 from flask import Flask, request, redirect
 from twilio import twiml
+import urllib
 
 import cooperhewitt.api.client
 
@@ -21,7 +22,7 @@ def hello():
 def sms():
     
     body = request.values.get('Body', None)
-    
+
     if (body):
         sms_text = process_body(body)
     else:
@@ -66,7 +67,10 @@ def get_by_accession_number(accession):
 
     api = cooperhewitt.api.client.OAuth2(token)
     method = 'cooperhewitt.objects.getInfo'
-    args = { 'accession_number': accession }
+
+    enc_accession = accession.encode("utf-8")
+    
+    args = { 'accession_number': enc_accession }
 		
     rsp = api.call(method, **args)
 
