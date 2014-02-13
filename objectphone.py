@@ -11,7 +11,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def hello():
-	r = twiml.Response()
+	r = twilio.twiml.Response()
 	r.say("Welcome to object phone!. ") 
 	r.say("I'm sorry, but we are currently performing some maintenance. Please feel free to talk to us by SMS for the time being! ")
 	return str(r)
