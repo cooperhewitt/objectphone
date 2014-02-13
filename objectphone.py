@@ -11,27 +11,27 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET','POST'])
 def hello():
-	r = twilio.twiml.Response()
-	r.say("Welcome to object phone!. ") 
-	with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
-		g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. ")
-		g.say("or, For a random object, press 2. ")
+    r = twilio.twiml.Response()
+    r.say("Welcome to object phone!. ") 
+    with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
+    	g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. ")
+    	g.say("or, For a random object, press 2. ")
         g.say("to hear what Micah has to say, press 3.")
-    
-	r.say("I'm sorry, I missed that, please try again. ")
-	r.redirect(url="/", method="GET")	
-	return str(r)
+
+    r.say("I'm sorry, I missed that, please try again. ")
+    r.redirect(url="/", method="GET")	
+    return str(r)
     
 @app.route('/initial-handler', methods=['GET','POST'])
 def handlecall():
     digits = request.values.get('Digits', None)
 
-    r = twiml.Response()
+    r = twilio.twiml.Response()
 
     if (digits == "1"):
     	with r.gather(timeout=10, action="object", method="POST") as g:
     		g.say("Please enter an object ID followed by the pound key.")
-	
+
     	r.say("I'm sorry, I missed that, please try again. ")
     	r.redirect(url="/initial-handler?Digits=1", method="POST", )
     	return str(r)
@@ -39,7 +39,7 @@ def handlecall():
     if (digits == "2"):
     	r.redirect(url="/random", method="GET")
     	return str(r)
-    
+
     if (digits == "3"):
         r.redirect(url="/wwms", method="GET")
         return str(r)
@@ -51,12 +51,12 @@ def handlecall():
 @app.route('/object', methods=['GET','POST'])
 def object():
     object_id = request.values.get('Digits', None)
-    r = twiml.Response()
+    r = twilio.twiml.Response()
 
     api = cooperhewitt.api.client.OAuth2(token)
     method = 'cooperhewitt.objects.getInfo'
     args = { 'id': object_id }
-	
+
     rsp = api.call(method, **args)
 
     if (rsp['stat'] == 'ok'):
@@ -77,6 +77,8 @@ def random():
     
 @app.route('/wwms')
 def wwms_voice():
+    r = twilio.twiml.Response()
+
     api = cooperhewitt.api.client.OAuth2(token)
     rsp = api.call('cooperhewitt.labs.whatWouldMicahSay')
 
@@ -89,6 +91,8 @@ def wwms_voice():
     
         
 def process_voice_object(obj):
+    r = twilio.twiml.Response()
+
     object_id = obj['id']
     medium = obj['medium']
     title = obj['title']
@@ -97,15 +101,17 @@ def process_voice_object(obj):
 
     if (title):
     	phrase = phrase + title + ". "
-	
+
     if (medium):
     	phrase = phrase + "My medium is " + medium + ". "
-		
+	
     r.say(phrase)
     r.redirect(url="/end-menu", method="GET")
     return str(r)
  
 def voice_oops():
+    r = twilio.twiml.Response()
+
     phrase = "Oops, looks like something ain't right. Please hold the line. "
     r.say(phrase)
     r.redirect(url="/end-menu", method="GET")
@@ -113,12 +119,12 @@ def voice_oops():
 
 @app.route("/end-menu")
 def endmenu():
-    r = twiml.Response()
+    r = twilio.twiml.Response()
     r.say("Thank you for using object phone. Please stay on the line to return to the main menu.")
     r.redirect(url="/", method="GET")
 
     return str(r)	
-		    
+	    
             
 ################ SMS STUFF ###########################
 @app.route('/sms', methods=['GET','POST'])
