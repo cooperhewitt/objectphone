@@ -93,7 +93,7 @@ def sms_help():
     return phrase
     
 def sms_oops():
-    return "Oops, looks like something ain't right. Please text 'help me' if you are having trouble. "
+    return "Oops, looks like something ain't right. Please text 'wtf' if you are having trouble. "
     
         
 def process_sms_object(obj):
@@ -118,7 +118,7 @@ def process_sms_object(obj):
 def process_body(body):
     
     # could be a bunch of stuff .. first check for words
-    if body.lower() == 'help me':
+    if body.lower() == 'wtf':
         rsp = sms_help()
     elif body.lower() == 'wwms':
         rsp = wwms()
