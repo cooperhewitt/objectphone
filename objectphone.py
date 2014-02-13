@@ -1,7 +1,7 @@
 import sys
 import os
 from flask import Flask, request, redirect
-from twilio import twiml
+import twilio.twiml
 
 import cooperhewitt.api.client
 
@@ -27,8 +27,8 @@ def sms():
     else:
         sms_text = sms_help()
         
-    r = twiml.Response()
-    r.sms(sms_text)
+    r = twilio.twiml.Response()
+    r.message(sms_text)
     return str(r)
 
 def wwms():
