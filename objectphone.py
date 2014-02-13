@@ -2,7 +2,6 @@ import sys
 import os
 from flask import Flask, request, redirect
 from twilio import twiml
-import urllib
 
 import cooperhewitt.api.client
 
@@ -69,6 +68,7 @@ def get_by_accession_number(accession):
     method = 'cooperhewitt.objects.getInfo'
 
     enc_accession = accession.encode("utf-8")
+    print enc_accession
     
     args = { 'accession_number': enc_accession }
 		
@@ -93,7 +93,7 @@ def sms_help():
     return phrase
     
 def sms_oops():
-    return "Oops, looks like something ain't right. Please text 'help' if you are having trouble. "
+    return "Oops, looks like something ain't right. Please text 'help me' if you are having trouble. "
     
         
 def process_sms_object(obj):
@@ -118,7 +118,7 @@ def process_sms_object(obj):
 def process_body(body):
     
     # could be a bunch of stuff .. first check for words
-    if body.lower() == 'help':
+    if body.lower() == 'help me':
         rsp = sms_help()
     elif body.lower() == 'wwms':
         rsp = wwms()
@@ -162,5 +162,5 @@ if __name__ == '__main__':
         print "You forgot to set your CH API key as an environment variable"
         sys.exit()
             
-    rsp = sms()
-    print rsp
+    #rsp = sms()
+    #print rsp
