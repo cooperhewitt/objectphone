@@ -106,6 +106,11 @@ def process_voice_object(obj):
     	phrase = phrase + "My medium is " + medium + ". "
 	
     r.say(phrase)
+    
+    if object_id == '18639541':
+        r.say("We also have an Object of the day post for this object, which you cna listen to now.")
+        r.play('http://audio.spokenlayer.com/cooperhewitt-org/2014/02/ab03ff8bdd197d7b5dd5d3525a42eb50/ab03ff8bdd197d7b5dd5d3525a42eb50-geoff-mayo.mp3')
+        
     r.redirect(url="/end-menu", method="GET")
     return str(r)
  
