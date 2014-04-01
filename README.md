@@ -14,7 +14,7 @@ call it!
 
 dial the number above from your touchtone phone and follow the menu options to
 
- 1. search by object ID
+ 1. search by object ID ( easter egg object 18639541 .. wait for it.. )
  2. listen to a random object
  3. hear "what micah says"
 
