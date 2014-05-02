@@ -27,5 +27,5 @@ send a text message to objectphone using the following options
  2. text 'wwms' to read "what micah says"
  3. text 'random' for a random object
  4. text any Cooper-Hewitt object ID to getInfo on that object from our [API](http://collection.cooperhewitt.org/api)
- 5. text any alphanumeric accession number to getInfo on that object fro our API. ( This doesn't always work )
+ 5. text any alphanumeric accession number to getInfo on that object from our API. ( This doesn't always work )
 
