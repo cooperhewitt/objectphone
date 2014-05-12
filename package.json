@@ -1,0 +1,23 @@
+{
+  "name": "objectphone",
+  "version": "0.0.0",
+  "description": "objectphone ===========",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cooperhewitt/objectphone.git"
+  },
+  "author": "Micah Walter <micah@micahwalter.com> (http://micahwalter.com/)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cooperhewitt/objectphone/issues"
+  },
+  "homepage": "https://github.com/cooperhewitt/objectphone",
+  "dependencies": {
+    "express": "^4.2.0",
+    "logfmt": "^1.1.2"
+  }
+}
