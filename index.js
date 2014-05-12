@@ -1,4 +1,5 @@
-var cooperhewitt = require('node-cooperhewitt')
+var twilio = require('twilio');
+var cooperhewitt = require('node-cooperhewitt');
 var express = require("express");
 var logfmt = require("logfmt");
 var app = express();
@@ -9,12 +10,22 @@ var api_token = process.env.CH_API_KEY;
 
 app.get('/', function(req, res) {
 
-	var method = 'cooperhewitt.objects.getRandom';
-	var args = {'access_token': api_token};
-
-	cooperhewitt.call(method, args, function(rsp){   
-	    res.send(rsp);  
-	});	
+	var resp = new twilio.TwimlResponse();
+	resp.say('Welcome to object phone! ');
+	resp.gather({ timeout:5, numDigits:1 }, function() {
+		
+		this.say('Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID.');
+		this.say('or, For a random object, press 2. ');
+		this.say('to hear what Micah has to say, press 3.');
+ 
+	});
+	
+	resp.say('I\'m sorry, I missed that, please try again. ');
+	
+	resp.redirect({url:'/', method:'GET'});
+	
+	res.set('Content-Type', 'text/xml');  
+    res.send(resp.toString());  
 	
 });
 
