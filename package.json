@@ -21,6 +21,6 @@
     "express": "^4.2.0",
     "logfmt": "^1.1.2",
     "node-cooperhewitt": "0.0.2",
-    "twilio": "^1.6.0",
+    "twilio": "^1.6.0"
   }
 }
