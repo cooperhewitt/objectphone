@@ -25,7 +25,7 @@ app.get('/', function(req, res) {
 	
 	resp.say('I\'m sorry, I missed that, please try again. ');
 
-	resp.redirect({url:'\/', method:'GET'});
+	resp.redirect({url:'./', method:'GET'});
 
 	res.set('Content-Type', 'text/xml');  
 	res.send(resp.toString());  
@@ -48,19 +48,19 @@ app.post('/handler', function(req, res) {
 		
 		resp.say('I\'m sorry, I missed that, please try again. ');
 
-		resp.redirect({url:'\/', method:'GET'});
+		resp.redirect({url:'../', method:'GET'});
 		res.send(resp.toString());
 	}
 
 	resp.say('I\'m sorry, that choice is invalid, please try again. ');
-	resp.redirect({url:'\/', method:'GET'});
+	resp.redirect({url:'../', method:'GET'});
 	
 	res.send(resp.toString());
 	
 });
 
 app.post('/object', function(req, res){
-	
+	console.log(req.body);
 	var digits = req.body.Digits;
 	
 	res.set('Content-Type', 'text/xml'); 
@@ -77,7 +77,7 @@ app.post('/object', function(req, res){
 			res.send(resp.toString());  
 		} else {
 			resp.say('Sorry, something went wrong');
-			resp.redirect({url:'\/', method:'GET'});
+			resp.redirect({url:'../', method:'GET'});
 			res.send(resp.toString());  
 		} 
 		
