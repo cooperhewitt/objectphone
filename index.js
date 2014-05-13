@@ -68,11 +68,19 @@ app.post('/object', function(req, res){
 	var method = 'cooperhewitt.objects.getInfo';
 	var args = {'access_token': api_token, 'id': digits };
 
-	cooperhewitt.call(method, args, function(rsp){   
+	cooperhewitt.call(method, args, function(rsp){ 
 		
 		var resp = new twilio.TwimlResponse();
-		resp.say('You\'ve reached ' + rsp.object.title);
-		res.send(resp.toString());  
+		
+		if (rsp['stat'] == 'ok'){	
+			resp.say('You\'ve reached ' + rsp.object.title);
+			res.send(resp.toString());  
+		} else {
+			resp.say('Sorry, something went wrong');
+			res.redirect({url:'/', method:'GET'});
+			res.send(resp.toString());  
+		} 
+		
 	}); 
 	
 });
