@@ -174,12 +174,38 @@ function process_voice_object(rsp){
 app.get('/sms', function(req, res){
 	
 	var body = req.query.Body;
-	var resp = new twilio.TwimlResponse();
-		
-	resp.sms("You texted me " + body);
+
+    if (body.toLowerCase() == 'wtf')
+        resp = sms_help();
+    else if (body.toLowerCase() == 'wwms')
+        console.log(body.toLowerCase()); //rsp = wwms()
+    else if (body.toLowerCase == 'random')
+        console.log(body.toLowerCase()); //rsp = random()    
+    //else if (is_it_an_int(body))
+        //rsp = get_by_object_id(body)
+    //else    
+        //rsp = get_by_accession_number(body)
+			
 	res.send(resp.toString());
 	
-})
+});
+
+function sms_help(){
+	
+	var resp = new twilio.TwimlResponse();
+	
+    phrase = "Thanks for texting me. It looks like you could use some help. "
+    
+    phrase = phrase + "Try texting the word 'random' to read about a random object from the collection. "
+    
+    phrase = phrase + "You can also text me an object ID number, or an accession number. "
+    
+    phrase = phrase + "To see what Micah might say about this, text 'wwms' and to re-read the help just text 'wtf' at any time. "
+    
+	resp.sms(phrase.toString());
+    
+	return resp;	
+}
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
