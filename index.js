@@ -34,7 +34,7 @@ app.get('/', function(req, res) {
 
 app.post('/handler', function(req, res) {
 	
-	var digits = req.body.digits;
+	var digits = req.body.Digits;
 
 	var resp = new twilio.TwimlResponse();
 
