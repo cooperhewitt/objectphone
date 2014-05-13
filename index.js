@@ -173,11 +173,9 @@ function process_voice_object(rsp){
 
 app.get('/sms', function(req, res){
 	
-	var body = req.body.Body;
+	var body = req.query.Body;
 	var resp = new twilio.TwimlResponse();
-	
-	console.log(req);
-	
+		
 	resp.sms("You texted me " + body);
 	res.send(resp.toString());
 	
