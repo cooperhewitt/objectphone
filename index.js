@@ -52,7 +52,7 @@ app.post('/handler', function(req, res) {
 		res.send(resp.toString());
 	}
 
-	res.say('I\'m sorry, that choice is invalid, please try again. ');
+	resp.say('I\'m sorry, that choice is invalid, please try again. ');
 
 	res.redirect({url:'/', method:'GET'});
 	res.send(resp.toString());
