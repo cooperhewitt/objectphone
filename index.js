@@ -12,12 +12,12 @@ app.get('/', function(req, res) {
 
 	var resp = new twilio.TwimlResponse();
 	resp.say('Welcome to object phone! ');
-	resp.gather({ timeout:5, numDigits:1 }, function() {
-		
+	resp.gather({ timeout:5, numDigits:1, action:'/handler' }, function() {		
+
 		this.say('Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID.');
 		this.say('or, For a random object, press 2. ');
-		this.say('to hear what Micah has to say, press 3.');
- 
+		this.say('to hear what Micah has to say, press 3.'); 
+
 	});
 	
 	resp.say('I\'m sorry, I missed that, please try again. ');
@@ -28,6 +28,19 @@ app.get('/', function(req, res) {
     res.send(resp.toString());  
 	
 });
+
+app.get('/handler', function(req, res) {
+	
+	var digits = req.params['digits'];
+	var resp = new twilio.TwimlResponse();
+	
+	resp.say('You pressed: ' + digits);
+	
+	res.set('Content-Type', 'text/xml');  
+    res.send(resp.toString());
+	
+});
+
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
