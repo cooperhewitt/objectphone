@@ -36,11 +36,25 @@ app.post('/handler', function(req, res) {
 	
 	var digits = req.body.Digits;
 
-	var resp = new twilio.TwimlResponse();
-
-	resp.say('You pressed: ' + digits);
-
 	res.set('Content-Type', 'text/xml');  
+	
+	var resp = new twilio.TwimlResponse();
+	
+	if (digits == "1"){
+		var resp = new twilio.TwimlResponse();
+		resp.gather({ timeout:10, action:'/object' }, function() {		
+			this.say('Please enter an object ID followed by the pound key.');
+		});
+		
+		resp.say('I\'m sorry, I missed that, please try again. ');
+
+		resp.redirect({url:'/handler?Digits=1', method:'GET'});
+		res.send(resp.toString());
+	}
+
+	res.say('I\'m sorry, that choice is invalid, please try again. ');
+
+	res.redirect({url:'/', method:'GET'});
 	res.send(resp.toString());
 	
 });
