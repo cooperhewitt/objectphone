@@ -176,7 +176,7 @@ app.get('/sms', function(req, res){
 	var body = req.body.Body;
 	var resp = new twilio.TwimlResponse();
 	
-	resp.say("You texted me " + body);
+	resp.sms("You texted me " + body);
 	res.send(resp.toString());
 	
 })
