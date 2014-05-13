@@ -11,6 +11,9 @@ app.use(bodyParser());
 
 var api_token = process.env.CH_API_KEY;
 
+
+// ################ VOICE STUFF ###########################
+
 app.get('/', function(req, res) {
 
 	var resp = new twilio.TwimlResponse();
@@ -166,6 +169,17 @@ function process_voice_object(rsp){
 	return resp;
 }
 
+// ################ SMS STUFF ###########################
+
+app.get('/sms', function(req, res){
+	
+	var body = req.body.Body;
+	var resp = new twilio.TwimlResponse();
+	
+	resp.say("You texted me " + body);
+	res.send(resp.toString());
+	
+})
 
 var port = Number(process.env.PORT || 5000);
 app.listen(port, function() {
