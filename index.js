@@ -74,12 +74,11 @@ app.post('/object', function(req, res){
 		
 		if (rsp['stat'] == 'ok'){	
 			resp.say('You\'ve reached ' + rsp.object.title);
-			res.send(resp.toString());  
 		} else {
 			resp.say('Sorry, something went wrong');
-			resp.redirect('/', {method:'GET'});
-			res.send(resp.toString());  
-		} 
+		}
+		resp.redirect('/', {method:'GET'});
+		res.send(resp.toString()); 
 		
 	}); 
 	
