@@ -29,7 +29,7 @@ app.get('/', function(req, res) {
 	
 });
 
-app.get('/handler', function(req, res) {
+app.post('/handler', function(req, res) {
 	
 	var digits = req.params['digits'];
 	var resp = new twilio.TwimlResponse();
