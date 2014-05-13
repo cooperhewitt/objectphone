@@ -48,7 +48,7 @@ app.post('/handler', function(req, res) {
 		
 		resp.say('I\'m sorry, I missed that, please try again. ');
 
-		resp.redirect({url:'/handler?Digits=1', method:'GET'});
+		resp.redirect({url:'/', method:'GET'});
 		res.send(resp.toString());
 	}
 
@@ -56,6 +56,24 @@ app.post('/handler', function(req, res) {
 
 	res.redirect({url:'/', method:'GET'});
 	res.send(resp.toString());
+	
+});
+
+app.post('/object', function(req, res){
+	
+	var digits = req.body.Digits;
+	
+	res.set('Content-Type', 'text/xml'); 
+	
+	var method = 'cooperhewitt.objects.getInfo';
+	var args = {'access_token': api_token, 'id': digits };
+
+	cooperhewitt.call(method, args, function(rsp){   
+		
+		var resp = new twilio.TwimlResponse();
+		resp.say('You\'ve reached ' + rsp.object.title);
+		res.send(resp.toString());  
+	}); 
 	
 });
 
