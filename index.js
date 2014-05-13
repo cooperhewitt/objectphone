@@ -53,8 +53,8 @@ app.post('/handler', function(req, res) {
 	}
 
 	resp.say('I\'m sorry, that choice is invalid, please try again. ');
-
-	res.redirect({url:'/', method:'GET'});
+	resp.redirect({url:'/', method:'GET'});
+	
 	res.send(resp.toString());
 	
 });
@@ -77,7 +77,7 @@ app.post('/object', function(req, res){
 			res.send(resp.toString());  
 		} else {
 			resp.say('Sorry, something went wrong');
-			res.redirect({url:'/', method:'GET'});
+			resp.redirect({url:'/', method:'GET'});
 			res.send(resp.toString());  
 		} 
 		
