@@ -173,38 +173,121 @@ function process_voice_object(rsp){
 
 app.get('/sms', function(req, res){
 	
-	var body = req.query.Body;
-
-    if (body.toLowerCase() == 'wtf')
-        resp = sms_help();
-    else if (body.toLowerCase() == 'wwms')
-        console.log(body.toLowerCase()); //rsp = wwms()
-    else if (body.toLowerCase == 'random')
-        console.log(body.toLowerCase()); //rsp = random()    
-    //else if (is_it_an_int(body))
-        //rsp = get_by_object_id(body)
-    //else    
-        //rsp = get_by_accession_number(body)
-			
-	res.send(resp.toString());
-	
-});
-
-function sms_help(){
+	res.set('Content-Type', 'text/xml');
 	
 	var resp = new twilio.TwimlResponse();
 	
-    phrase = "Thanks for texting me. It looks like you could use some help. "
+	var body = req.query.Body;
+
+    if (body.toLowerCase() == 'wtf'){
+		
+	    phrase = "Thanks for texting me. It looks like you could use some help. "    
+	    phrase = phrase + "Try texting the word 'random' to read about a random object from the collection. "
+	    phrase = phrase + "You can also text me an object ID number, or an accession number. "
+	    phrase = phrase + "To see what Micah might say about this, text 'wwms' and to re-read the help just text 'wtf' at any time. "
     
-    phrase = phrase + "Try texting the word 'random' to read about a random object from the collection. "
-    
-    phrase = phrase + "You can also text me an object ID number, or an accession number. "
-    
-    phrase = phrase + "To see what Micah might say about this, text 'wwms' and to re-read the help just text 'wtf' at any time. "
-    
-	resp.sms(phrase.toString());
-    
-	return resp;	
+		resp.sms(phrase.toString());
+        res.send(resp.toString());
+		
+	} else if (body.toLowerCase() == 'wwms'){
+		var method = 'cooperhewitt.labs.whatWouldMicahSay';
+		var args = {'access_token': api_token};
+	
+		cooperhewitt.call(method, args, function(rsp){
+	
+			micahSays = rsp.micah.says;
+	
+			resp.sms(micahSays);
+			res.send(resp.toString());
+		
+		});
+		
+	} else if (body.toLowerCase() == 'random'){
+		var method = 'cooperhewitt.objects.getRandom';
+		var args = {'access_token': api_token};
+	
+		cooperhewitt.call(method, args, function(rsp){
+			
+			if (rsp['stat'] == 'ok'){	
+				rand = sms_process_object(rsp.object);
+				resp.sms(rand);
+				res.send(resp.toString()); 
+			} else {
+				resp.say('Sorry, something went wrong');
+				resp.redirect('/', {method:'GET'});
+				res.send(resp.toString()); 		
+			}
+			
+		
+		});
+		
+	} else if (is_it_an_int(body) == true){
+		var method = 'cooperhewitt.objects.getInfo';
+		var args = {'access_token': api_token, 'id':body};
+	
+		cooperhewitt.call(method, args, function(rsp){
+	
+			if (rsp['stat'] == 'ok'){	
+				obj = sms_process_object(rsp.object);
+				resp.sms(obj);
+				res.send(resp.toString()); 
+			} else {
+				resp.say('Sorry, something went wrong');
+				resp.redirect('/', {method:'GET'});
+				res.send(resp.toString()); 		
+			}
+		
+		});
+  		
+  	} else {
+		var method = 'cooperhewitt.objects.getInfo';
+		var args = {'access_token': api_token, 'accession_number':body};
+	
+		cooperhewitt.call(method, args, function(rsp){
+	
+			if (rsp['stat'] == 'ok'){	
+				obj = sms_process_object(rsp.object);
+				resp.sms(obj);
+				res.send(resp.toString()); 
+			} else {
+				resp.say('Sorry, something went wrong');
+				resp.redirect('/', {method:'GET'});
+				res.send(resp.toString()); 		
+			}
+		
+		});
+ 	   	
+  	}
+			
+	
+	
+});
+
+function sms_process_object(obj){
+	
+    object_id = obj.id;
+	medium = obj.medium;
+	title = obj.title;
+
+	phrase = "Thanks for texting me. "
+
+	if (title){
+		phrase = phrase + "I'm called " + title + ". ";
+	}
+
+	if (medium){
+	    phrase = phrase + "My medium is " + medium + ". ";
+	}
+
+	phrase = phrase + "To read more about me, click http://collection.cooperhewitt.org/objects/" + object_id;	
+	
+	return phrase;
+}
+
+function is_it_an_int(n){
+    if(/^(\-|\+)?([0-9]+|Infinity)$/.test(n))
+      return true;
+    return false;
 }
 
 var port = Number(process.env.PORT || 5000);
