@@ -213,8 +213,7 @@ app.get('/sms', function(req, res){
 				resp.sms(rand);
 				res.send(resp.toString()); 
 			} else {
-				resp.say('Sorry, something went wrong');
-				resp.redirect('/', {method:'GET'});
+				resp.sms('Sorry, something went wrong');
 				res.send(resp.toString()); 		
 			}
 			
@@ -232,8 +231,7 @@ app.get('/sms', function(req, res){
 				resp.sms(obj);
 				res.send(resp.toString()); 
 			} else {
-				resp.say('Sorry, something went wrong');
-				resp.redirect('/', {method:'GET'});
+				resp.sms('Sorry, something went wrong');
 				res.send(resp.toString()); 		
 			}
 		
@@ -250,8 +248,7 @@ app.get('/sms', function(req, res){
 				resp.sms(obj);
 				res.send(resp.toString()); 
 			} else {
-				resp.say('Sorry, something went wrong');
-				resp.redirect('/', {method:'GET'});
+				resp.sms('Sorry, something went wrong');
 				res.send(resp.toString()); 		
 			}
 		
