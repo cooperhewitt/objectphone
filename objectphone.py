@@ -29,6 +29,10 @@ def handlecall():
 
     r = twilio.twiml.Response()
 
+    if (digits == "1"):
+    	r.redirect(url="/adjay", method="GET")
+    	return str(r)
+
     if (digits == "2"):
     	with r.gather(timeout=10, action="object", method="POST") as g:
     		g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/OBJECT_MENU_1.mp3")
@@ -65,6 +69,18 @@ def object():
         return process_voice_object(obj)
     else:
         return voice_oops()
+
+@app.route('/adjay', methods=['GET','POST'])
+def adjay():
+    r = twilio.twiml.Response()
+    
+    r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_1.mp3")
+    r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_2.mp3")
+    
+    r.say("I'm sorry, that choice is invalid, please try again. ")
+    r.redirect(url="/", method="GET")	
+    return str(r)
+
 
 @app.route('/random')
 def random():
