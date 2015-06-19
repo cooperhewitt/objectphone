@@ -15,8 +15,9 @@ def hello():
     with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
         g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_1.mp3") 
         g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_2.mp3") # press 1 to listen to adjay
-    	g.say("or, For a random object, press 2. ")
-        g.say("to hear what Micah has to say, press 3.")
+    	g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_3.mp3") # search by obj ID, press 2
+        g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_4.mp3") # random object, press 3
+        g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_5.mp3") # return to this menu, press 0
 
     r.say("I'm sorry, I missed that, please try again. ")
     r.redirect(url="/", method="GET")	
@@ -28,20 +29,20 @@ def handlecall():
 
     r = twilio.twiml.Response()
 
-    if (digits == "1"):
+    if (digits == "2"):
     	with r.gather(timeout=10, action="object", method="POST") as g:
-    		g.say("Please enter an object ID followed by the pound key.")
+    		g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/OBJECT_MENU_1.mp3")
 
     	r.say("I'm sorry, I missed that, please try again. ")
     	r.redirect(url="/initial-handler?Digits=1", method="POST", )
     	return str(r)
 
-    if (digits == "2"):
+    if (digits == "3"):
     	r.redirect(url="/random", method="GET")
     	return str(r)
 
-    if (digits == "3"):
-        r.redirect(url="/wwms", method="GET")
+    if (digits == "0"):
+        r.redirect(url="/", method="GET")
         return str(r)
 
     r.say("I'm sorry, that choice is invalid, please try again. ")
