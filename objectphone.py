@@ -14,7 +14,8 @@ def hello():
     r = twilio.twiml.Response()
     r.say("Welcome to object phone!. ") 
     with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
-    	g.say("Press one on your touchtone phone to search the Cooper-Hewitt collection by object ID. ")
+        r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_1.mp3")
+        r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_2.mp3") # press 1 to listen to adjay
     	g.say("or, For a random object, press 2. ")
         g.say("to hear what Micah has to say, press 3.")
 
