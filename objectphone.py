@@ -77,10 +77,15 @@ def adjay():
     r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_1.mp3")
     r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_2.mp3")
     
-    r.say("I'm sorry, that choice is invalid, please try again. ")
-    r.redirect(url="/", method="GET")	
-    return str(r)
+    with r.gather(timeout=10, action="object", method="POST") as g:
+    	g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_3.mp3")
 
+    with r.gather(timeout=5, numDigits=1, action="adjay-all", method="POST") as g:
+        g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_4.mp3")
+
+    r.play("I'm sorry, I missed that, please try again. ")
+    r.redirect(url="/adjay", method="POST", )
+    return str(r)
 
 @app.route('/random')
 def random():
