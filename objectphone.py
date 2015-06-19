@@ -80,7 +80,7 @@ def adjay():
     with r.gather(timeout=10, action="object", method="POST") as g:
     	g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_3.mp3")
 
-    with r.gather(timeout=5, numDigits=1, action="adjay-all", method="POST") as g:
+    with r.gather(timeout=5, numDigits=1, action="adjay-all", method="GET") as g:
         g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/ADJAY_MENU_4.mp3")
 
     r.play("I'm sorry, I missed that, please try again. ")
