@@ -163,6 +163,10 @@ def random():
     random = rsp['object']
     
     return process_sms_object(random)
+    
+def subscribe():
+    phrase = "Thanks for subscribing. To stop receiving texts, just text STOP."
+    return phrase
 
 def get_by_object_id(object_id):
 
@@ -239,7 +243,9 @@ def process_body(body):
     elif body.lower() == 'wwms':
         rsp = wwms()
     elif body.lower() == 'random':
-        rsp = random()    
+        rsp = random() 
+    elif body.lower() == 'subscribe':
+        rsp = subscribe()   
     elif is_it_an_int(body):
         rsp = get_by_object_id(body)
     else:    
