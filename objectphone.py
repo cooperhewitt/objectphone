@@ -12,10 +12,9 @@ app = Flask(__name__)
 @app.route('/', methods=['GET','POST'])
 def hello():
     r = twilio.twiml.Response()
-    r.say("Welcome to object phone!. ") 
     with r.gather(timeout=5, numDigits=1, action="initial-handler", method="POST") as g:
-        r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_1.mp3")
-        r.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_2.mp3") # press 1 to listen to adjay
+        g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_1.mp3") 
+        g.play("https://s3.amazonaws.com/objectphone.cooperhewitt.org/menu/MAIN_MENU_2.mp3") # press 1 to listen to adjay
     	g.say("or, For a random object, press 2. ")
         g.say("to hear what Micah has to say, press 3.")
 
