@@ -114,8 +114,96 @@ def wwms_voice():
         
 def process_voice_object(obj):
     r = twilio.twiml.Response()
-
+    
     object_id = obj['id']
+ 
+ 
+    ### featured exhibit for David Adjay - Eventually all this should be pulled from the API.
+    
+    # Adjay exhibit 1
+    if object_id == '18411459':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18411459.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 2   
+    if object_id == '18411461':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18411461.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 3  
+    if object_id == '18433051':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18433051.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 4
+    if object_id == '18440995':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18440995.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 5   
+    if object_id == '18441029':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18441029.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 6   
+    if object_id == '18467843':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467843.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 7
+    if object_id == '18467869':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467869.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 8
+    if object_id == '18467877':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467877.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 9
+    if object_id == '18497699':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18497699.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+        
+    # Adjay exhibit 10
+    if object_id == '18628819':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18628819.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 11
+    if object_id == '18643743':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18643743.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 12
+    if object_id == '18687429':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18687429.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 13
+    if object_id == '18698497':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18698497.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
+    # Adjay exhibit 14
+    if object_id == '18705685':
+        r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18705685.mp3')
+        r.redirect(url="/end-menu", method="GET")
+        return str(r)
+
     medium = obj['medium']
     title = obj['title']
 
