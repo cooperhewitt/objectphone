@@ -231,6 +231,27 @@ def voice_oops():
     r.say(phrase)
     r.redirect(url="/end-menu", method="GET")
     return str(r)
+    
+@app.route('/adjay-all')
+def adjay_all():
+    r = twilio.twiml.Response()
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18411459.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18411461.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18433051.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18440995.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18441029.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467843.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467869.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18467877.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18497699.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18628819.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18643743.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18687429.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18698497.mp3')
+    r.play('https://s3.amazonaws.com/objectphone.cooperhewitt.org/objects/CH-18705685.mp3')
+
+    r.redirect(url="/end-menu", method="GET")
+    return str(r)
 
 @app.route("/end-menu")
 def endmenu():
