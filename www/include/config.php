@@ -154,6 +154,12 @@
 
 	$GLOBALS['cfg']['pagination_keyboard_shortcuts'] = 1;
 	$GLOBALS['cfg']['pagination_touch_shortcuts'] = 1;
+
+
+	# cooper hewitt api
+
+	$GLOBALS['cfg']['cooperhewitt_api_endpoint'] = "https://api.collection.cooperhewitt.org/rest";
+	$GLOBALS['cfg']['cooperhewitt_api_access_token'] = 'READ-FROM-SECRETS';
 	
 	# twilio
 

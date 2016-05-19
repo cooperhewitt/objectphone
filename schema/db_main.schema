@@ -27,3 +27,17 @@ CREATE TABLE `users_password_reset` (
   KEY `by_user` (`user_id`),
   KEY `by_timestamp` (`created`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `messages`;
+
+CREATE TABLE `messages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `created` int(10) unsigned NOT NULL,
+  `MessageSid` varchar(34) DEFAULT NULL,
+  `AccountSid` varchar(34) DEFAULT NULL,
+  `From` varchar(20) DEFAULT NULL,
+  `To` varchar(20) DEFAULT NULL,
+  `Body` text DEFAULT NULL,
+  `NumMedia` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;

@@ -25,7 +25,7 @@
 			'NumMedia' => request_str("NumMedia"),
 		);
 
-		# messages_create_message($message);
+		messages_create_message($message);
 
 		# this is the part where we parse the body to find what you actually want me to do
 		# start by just taking the first word
@@ -43,13 +43,13 @@
 		$methods = $GLOBALS['cfg']['sms']['methods'];
 
 		if ((! $method) || (! isset($methods[$method]))){
-			sms_output_error(404, "Method '{$method}' not found");
+			sms_output_error(404, "Not sure I understand your meaning, but I'll get back to you soon as I can.");
 		}
 
 		$method_row = $methods[$method];
 
 		if (! $method_row['enabled']){
-			sms_output_error(404, "Method '{$method}' not enabled");
+			sms_output_error(404, "Not sure I understand your meaning, but I'll get back to you soon as I can.");
 		}
 
 		$method_row['name'] = $method;
@@ -62,7 +62,7 @@
 		$func = "{$method_row['library']}_{$method}";
 
 		if (! function_exists($func)){
-			sms_output_error(404, "Method not found");
+			sms_output_error(404, "Not sure I understand your meaning, but I'll get back to you soon as I can.");
 		}
 
 		call_user_func($func);

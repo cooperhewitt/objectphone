@@ -41,19 +41,23 @@
 
 		# make some twiml
 
-		$twiml = new Services_Twilio_Twiml();
+		$response = new Services_Twilio_Twiml();
 
 		if (isset($more['is_error'])){
-			$twiml->message($rsp['error']['error']);
-			print $twiml;
+			$response->message($rsp['error']['error']);
+			print $response;
 			exit();
 		}
 
 		foreach ($rsp as $item) {
-			$twiml->message($item);
+			$response->message($item);
+			if (isset($more['media'])){
+				$media = $response->message();
+				$media->media($more['media']);
+			}
 		}
 
-		print $twiml;
+		print $response;
 		exit();
 	}
 

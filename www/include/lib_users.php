@@ -89,6 +89,16 @@
 		));
 	}
 
+
+	#################################################################
+
+	function users_confirm_phone(&$user){
+
+		return users_update_user($user, array(
+			'confirmed' => time()
+		));
+	}
+
 	#################################################################
 
 	function users_delete_user(&$user){
@@ -126,6 +136,15 @@
 		$enc_email = AddSlashes($email);
 
 		return db_single(db_fetch("SELECT * FROM users WHERE email='{$enc_email}'"));
+	}
+
+	#################################################################
+
+	function users_get_by_phone($phone){
+
+		$enc_phone = AddSlashes($phone);
+
+		return db_single(db_fetch("SELECT * FROM users WHERE phone='{$enc_phone}'"));
 	}
 
 	#################################################################

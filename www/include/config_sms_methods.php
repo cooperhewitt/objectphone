@@ -4,25 +4,11 @@
 
 	$GLOBALS['cfg']['sms']['methods'] = array_merge(array(
 
-		"menu" => array(
-			"description" => "Get a list of all the methods",
+		"design" => array(
+			"description" => "Confirm the subscription of a phone",
 			"documented" => 1,
 			"enabled" => 1,
-			"library" => "sms_spec"
-		),
-
-		"echo" => array(
-			"description" => "A testing method which echo's all parameters back in the response.",
-			"documented" => 1,
-			"enabled" => 1,
-			"library" => "sms_test"
-		),
-
-		"error" => array(
-			"description" => "Return a test error from the SMS API",
-			"documented" => 1,
-			"enabled" => 1,
-			"library" => "sms_test"
+			"library" => "sms_users"
 		),
 
 		"object" => array(
@@ -34,13 +20,6 @@
 
 		"random" => array(
 			"description" => "Return a random object",
-			"documented" => 1,
-			"enabled" => 1,
-			"library" => "sms_objects"
-		),
-
-		"ask" => array(
-			"description" => "Ask a question",
 			"documented" => 1,
 			"enabled" => 1,
 			"library" => "sms_objects"
