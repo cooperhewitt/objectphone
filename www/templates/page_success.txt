@@ -1,0 +1,9 @@
+{include file='inc_head.txt'}
+
+<div class="container">
+	<h1>Success</h1>
+
+	<p>Awesome, you've signed up. Go check your phone and reply DESIGN to confirm.</p>
+</div>
+
+{include file='inc_foot.txt'}

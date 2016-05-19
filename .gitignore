@@ -1,0 +1,9 @@
+*~
+*#
+www/include/secrets*.php
+www/include/config_local*.php
+.vagrant
+tests/coverage.state
+coverage/
+vendor/
+composer.phar
