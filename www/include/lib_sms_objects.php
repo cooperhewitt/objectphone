@@ -1,6 +1,7 @@
 <?php
 
 	loadlib("cooperhewitt_api");
+	loadlib("deliveries");
 
 	#################################################################
 
@@ -43,6 +44,9 @@
 			$out['extra'] = $extra;
 		}
 
+		$more['method'] = "object";
+		$more['object_id'] = $data['object']['id'];
+
 		sms_output_ok($out, $more);
 	}
 
@@ -77,6 +81,8 @@
 		$more = array();
 
 		$more['media'] = $data['object']['images'][0]['n']['url'];
+		$more['method'] = "random";
+		$more['object_id'] = $data['object']['id'];
 
 		sms_output_ok($out, $more);
 

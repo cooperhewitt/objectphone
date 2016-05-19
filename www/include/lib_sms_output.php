@@ -3,6 +3,7 @@
 	require_once('twilio-php/Services/Twilio.php');
 
 	loadlib("messages");
+	loadlib("deliveries");
 
 	#################################################################
 
@@ -76,6 +77,12 @@
 			
 			messages_create_message($log);
 
+			if (($more['method'] == "object") || ($more['method'] == "random")){
+				$log['object_id'] = $more['object_id'];
+			}
+			
+			deliveries_create_delivery($log);
+			
 			$msg->sid;
 			exit();
 		} catch (Services_Twilio_RestException $e) {
