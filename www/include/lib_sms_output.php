@@ -2,6 +2,8 @@
 
 	require_once('twilio-php/Services/Twilio.php');
 
+	loadlib("messages");
+
 	#################################################################
 
 	function sms_output_ok($rsp=array(), $more=array()){
@@ -36,35 +38,50 @@
 	#################################################################
 
 	function sms_output_send($rsp, $more=array()){
+		
+		$sid = $GLOBALS['cfg']['twilio_account_sid'];
+		$token = $GLOBALS['cfg']['twilio_api_token'];
 
-		$ok = ($more['is_error']) ? 0 : 1;
+		$client = new Services_Twilio($sid, $token);
 
-		# make some twiml
-
-		$response = new Services_Twilio_Twiml();
-
-		if (isset($more['is_error'])){
-			$response->message($rsp['error']['error']);
-			print $response;
-			exit();
-		}
+		$from = $GLOBALS['cfg']['twilio_number'];
+		$to = request_str("From");
 
 		foreach ($rsp as $item) {
-
 			if (isset($more['media'])){
-				$media = $response->message();
-				$media->media($more['media']);
-				$media->body($item);
+				$body .= $item;
+				$media = array($more['media']);
 			} else {
-				$response->message($item);
+				$body .= $item;
 			}
 		}
 
-		print $response;
+		if (isset($more['is_error'])){
+			$body = $rsp['error']['error'];
+		}
 
-		### somehow log this...
+		try {
+			$msg = $client->account->messages->sendMessage( $from, $to, $body, $media);
 
-		exit();
+			
+			### log the message in mysql
+			
+			$log = array(
+				'MessageSid' => $msg->sid,
+				'AccountSid' => $sid,
+				'From' => $from, 
+				'To' => $to,
+				'Body' => $body
+			);
+			
+			messages_create_message($log);
+
+			$msg->sid;
+			exit();
+		} catch (Services_Twilio_RestException $e) {
+			$e->getMessage();
+			exit();
+		}
 	}
 
 	#################################################################
