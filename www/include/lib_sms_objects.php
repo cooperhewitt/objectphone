@@ -35,10 +35,6 @@
 
 		$out['description'] = $data['object']['title'] . "\n" . $data['object']['url'];
 
-		if ($data['object']['description']){
-			$out['object'] = $data['object']['description'];
-		}
-
 		$more = array();
 
 		$more['media'] = $data['object']['images'][0]['n']['url'];
@@ -76,12 +72,12 @@
 			sms_output_error(404, "Cant get no...");
 		}
 
-		$out['title'] = $data['object']['title'];
+		$out['description'] = $data['object']['title'] . "\n" . $data['object']['url'];
 
-		if ($data['object']['description']){
-			$out['object'] = $data['object']['description'];
-		}
+		$more = array();
 
-		sms_output_ok($out);
+		$more['media'] = $data['object']['images'][0]['n']['url'];
+
+		sms_output_ok($out, $more);
 
 	}
