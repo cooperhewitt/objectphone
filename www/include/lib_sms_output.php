@@ -50,14 +50,20 @@
 		}
 
 		foreach ($rsp as $item) {
-			$response->message($item);
+
 			if (isset($more['media'])){
 				$media = $response->message();
 				$media->media($more['media']);
+				$media->body($item);
+			} else {
+				$response->message($item);
 			}
 		}
 
 		print $response;
+
+		### somehow log this...
+
 		exit();
 	}
 
