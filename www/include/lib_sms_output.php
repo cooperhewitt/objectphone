@@ -46,7 +46,12 @@
 		$client = new Services_Twilio($sid, $token);
 
 		$from = $GLOBALS['cfg']['twilio_number'];
-		$to = request_str("From");
+
+		if (!isset($more['To'])){
+			$to = request_str("From");
+		} else {
+			$to = $more['To'];
+		}
 
 		foreach ($rsp as $item) {
 			if (isset($more['media'])){

@@ -131,6 +131,13 @@
 
 	#################################################################
 
+	function users_get_confirmed_users(){
+
+		return db_fetch("SELECT * FROM users WHERE confirmed !=0");
+	}
+
+	#################################################################
+
 	function users_get_by_email($email){
 
 		$enc_email = AddSlashes($email);
