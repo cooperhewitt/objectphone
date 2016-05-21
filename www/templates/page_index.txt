@@ -18,7 +18,7 @@
 
 	        <div class="form-group{if $error_missing && !$phone} error{/if}">
 			<label class="control-label" for="phone">phone</label>
-			<input type="text" name="phone" size="40" value="{$phone|escape}" class="form-control" />
+			<input type="text" name="phone" class="input-medium bfh-phone" data-format="+1 (ddd) ddd-dddd"  value="{$phone|escape}" />
 		</div>
 
 	        <div class="form-group text-center" style="margin-top:2em; margin-bottom:4em;">

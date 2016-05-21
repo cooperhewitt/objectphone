@@ -24,6 +24,17 @@
 		}
 
 		#
+		# convert to valid phone number
+		#
+
+		## remove white space
+		$phone = preg_replace('/\s+/', '', $phone);
+		## remove special characters
+		$phone = preg_replace('/[^0-9]/i', '', $phone);
+		## remove the 1
+		$phone = substr($phone, 1);
+
+		#
 		# already signed up?
 		#
 
