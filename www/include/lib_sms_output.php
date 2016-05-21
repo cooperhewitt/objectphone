@@ -84,9 +84,8 @@
 
 			if (($more['method'] == "object") || ($more['method'] == "random")){
 				$log['object_id'] = $more['object_id'];
+				deliveries_create_delivery($log);
 			}
-			
-			deliveries_create_delivery($log);
 			
 			$msg->sid;
 			exit();
