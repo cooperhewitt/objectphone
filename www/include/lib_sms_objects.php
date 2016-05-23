@@ -65,7 +65,8 @@
 
 		$args = array(
 			"access_token" => $GLOBALS['cfg']['cooperhewitt_api_access_token'],
-			"has_image" => "YES",
+			"has_image" => "1",
+			"extras" => "images"
 		);
 
 		$rsp = cooperhewitt_api_call("cooperhewitt.objects.getRandom", $args);
