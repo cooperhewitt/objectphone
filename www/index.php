@@ -34,6 +34,13 @@
 		## remove the 1
 		$phone = substr($phone, 1);
 
+
+		if (strlen($phone) != 10){
+
+			$smarty->assign('error_missing', 1);
+			$ok = 0;
+		}
+
 		#
 		# already signed up?
 		#
