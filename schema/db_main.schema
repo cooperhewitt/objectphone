@@ -1,0 +1,58 @@
+DROP TABLE IF EXISTS `users`;
+
+CREATE TABLE `users` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(255) DEFAULT NULL,
+  `phone` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `deleted` int(10) unsigned NOT NULL,
+  `created` int(10) unsigned NOT NULL,
+  `password` char(64) DEFAULT NULL,
+  `conf_code` char(24) DEFAULT NULL,
+  `confirmed` int(10) unsigned NOT NULL,
+  `cluster_id` tinyint(3) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `by_email` (`email`),
+  UNIQUE KEY `by_username` (`username`,`deleted`),
+  UNIQUE KEY `by_phone` (`phone`,`deleted`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `users_password_reset`;
+
+CREATE TABLE `users_password_reset` (
+  `user_id` int(10) unsigned NOT NULL,
+  `reset_code` char(32) DEFAULT NULL,
+  `created` int(10) unsigned NOT NULL,
+  UNIQUE KEY `by_code` (`reset_code`),
+  KEY `by_user` (`user_id`),
+  KEY `by_timestamp` (`created`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `messages`;
+
+CREATE TABLE `messages` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `created` int(10) unsigned NOT NULL,
+  `MessageSid` varchar(34) DEFAULT NULL,
+  `AccountSid` varchar(34) DEFAULT NULL,
+  `From` varchar(20) DEFAULT NULL,
+  `To` varchar(20) DEFAULT NULL,
+  `Body` text DEFAULT NULL,
+  `NumMedia` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `deliveries`;
+
+CREATE TABLE `deliveries` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `delivered` int(10) unsigned NOT NULL,
+  `MessageSid` varchar(34) DEFAULT NULL,
+  `AccountSid` varchar(34) DEFAULT NULL,
+  `From` varchar(20) DEFAULT NULL,
+  `To` varchar(20) DEFAULT NULL,
+  `Body` text DEFAULT NULL,
+  `object_id` bigint(64) unsigned NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
