@@ -22,6 +22,8 @@
 
 		$more['is_error'] = 1;
 
+		### send to Slack ... 
+
 		sms_output_send($out, $more);
 	}
 
