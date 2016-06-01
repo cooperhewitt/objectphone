@@ -3,13 +3,19 @@
 <div class="container">
   <div class="hero-unit">
 
-  
 	{if $error_missing}		<p class="alert alert-error">Please fill out all the fields</p>{/if}
 	{if $error_already_signed_up}	<p class="alert alert-error">It looks like this phone number has already been signed up.</p>{/if}
 	{if $error_failed}		<p class="alert alert-error">Failed for an unknown reason :(</p>{/if}
 
-       <h1>Hello</h1>
-       <p>To sign up for objectphone, just enter your phone number below.</p>
+       <h1>"Hello, and welcome to Object Phone!"</h1>
+
+       <p>Inspired by the famous “Movie Phone” episode of Seinfeld, Object Phone is a <a href="http://labs.cooperhewitt.org">Cooper Hewitt Labs</a> experiment that allows anyone to access the entirety of Cooper Hewitt’s collection through the use of a touchtone phone.</p>
+
+       <p>Object Phone is a lot of things. If you are interested in its genesis, check out <a href="http://labs.cooperhewitt.org/2013/object-phone/">this blog post</a> which introduced Object Phone in 2013!<br />In 2015, Frith Williams wrote this in depth analysis of her reactions to the project <a href="http://labs.cooperhewitt.org/2015/object-phone-talking-cross-platform-content-in-museums/">here</a></p>
+
+       <hr>
+       <p>To sign up for daily objects sent via MMS, just enter your phone number below.</p>
+       <p>NOTE: This is a new, experimental feature. If you sign up and realize that it's too annoying, please just text STOP and I won't send you anyhting ever again. I won't be offended!</p>
 
   	<form action="{$cfg.abs_root_url}" method="POST" accept-encoding="UTF-8" class="form" role="form" id="signup">
 		{$crumb_key|crumb_input}

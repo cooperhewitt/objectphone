@@ -1,7 +1,5 @@
-<div class="container">
-
-<nav class="navbar" role="navigation" id="header">
-
+<div class="navbar navbar-default navbar-fixed-top" role="navigation" id="header">
+     <div class="container">
 	  <div class="navbar-header">
 	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-head-collapse">
 	            <span class="sr-only">Toggle navigation</span>
@@ -53,7 +51,6 @@
 	      </ul>
 	</div>
       {/if}
-
-</nav>
-
+      </div>
 </div>
+
