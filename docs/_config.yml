@@ -1,6 +1,11 @@
-# Site settings
-title: objectphone
-baseurl: "/objectphone" # the subpath of your site, e.g. /blog
+title: objectphone docs
+
+baseurl: "/objectphone"
 
 # Build settings
 markdown: kramdown
+
+# collections
+collections:
+  docs:
+        output: true
