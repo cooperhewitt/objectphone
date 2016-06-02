@@ -28,7 +28,7 @@
 		if (isset($more['sms'])){
 			$slack = array(
 				'channel' => '#ask',
-				'username' => 'objectphone'
+				'username' => $more['from']
 			);
 
 			$number = substr($more['from'], 2);
