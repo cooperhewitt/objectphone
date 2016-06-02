@@ -66,6 +66,10 @@ RewriteRule  ^account/?$		account.php		[L]
 RewriteRule  ^account/password/?$	account_password.php	[L]
 RewriteRule  ^account/delete/?$		account_delete.php	[L]
 
+# Admin pages
+RewriteRule ^admin/messages/([0-9]+)/?$	messages.php?number=$1	[L,QSA]
+
+
 # General pages
 
 RewriteRule ^about/?$			about.php 		[L,QSA]

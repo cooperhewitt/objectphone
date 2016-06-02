@@ -1,0 +1,26 @@
+{assign var="page_title" value="Messages"}
+{include file="inc_head.txt"}
+
+<div class="container">
+	<h1>Conversation with {$number|escape}</h1>
+	<input type="text" class="form-control" placeholder="Reply"><br />
+	<button type="button" class="btn btn-primary">SEND</button>
+
+	{foreach from=$messages item=message}
+	{if $message.From=='19172675394'}
+		<blockquote class="blockquote-reverse">
+		<p>{$message.Body|escape}</p>
+		<footer>Our reply</footer>
+		</blockquote>
+	{else}
+		<blockquote>
+		<p>{$message.Body|escape}</p>
+		<footer>From {$message.From|escape}</footer>
+		</blockquote>
+	{/if}
+	{/foreach}
+
+
+</div>
+
+{include file="inc_foot.txt"}

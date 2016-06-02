@@ -31,7 +31,9 @@
 				'username' => 'objectphone'
 			);
 
-			slack($more['sms'], $slack);
+			$number = substr($more['from'], 2);
+			$msg = $more['sms'] . " - http://objectphone.cooperhewitt.org/admin/messages/" . $number;
+			slack($msg, $slack);
 		}
 
 		sms_output_send($out, $more);
