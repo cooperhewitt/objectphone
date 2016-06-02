@@ -39,11 +39,9 @@
 			'per_page' => 20,
 		);
 
-		$number_with_code = "+1" . $number;
-
 		$enc_number = AddSlashes($number_with_code);
 
-		$rsp = db_fetch_paginated("SELECT * FROM messages WHERE messages.From='{$enc_number}' OR messages.To='{$enc_number}' ORDER BY id DESC", $more);
+		$rsp = db_fetch_paginated("SELECT * FROM messages WHERE messages.From LIKE '%{$enc_number}%' OR messages.To LIKE '%{$enc_number}%' ORDER BY id DESC", $more);
 
 		return $rsp;
 

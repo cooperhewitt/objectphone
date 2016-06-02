@@ -3,8 +3,12 @@
 
 <div class="container">
 	<h1>Conversation with {$number|escape}</h1>
-	<input type="text" class="form-control" placeholder="Reply"><br />
-	<button type="button" class="btn btn-primary">SEND</button>
+	<form action="{$cfg.abs_root_url}admin/messages/{$number|escape}" method="post" accept-encoding="UTF-8" class="form-horizontal">
+		<input type="hidden" name="send" value="1" />
+		<input type="hidden" name="number" value="{$number|escape}" />
+	<input type="text" name="msg" class="form-control" placeholder="Reply"><br />
+	<button type="submit" class="btn btn-primary">SEND</button>
+	</form>
 
 	{foreach from=$messages item=message}
 	{if $message.From=='19172675394'}
