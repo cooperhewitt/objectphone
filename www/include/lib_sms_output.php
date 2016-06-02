@@ -28,6 +28,7 @@
 		if (isset($more['sms'])){
 			$slack = array(
 				'channel' => '#ask',
+				'username' => 'objectphone'
 			);
 
 			slack($more['sms'], $slack);
