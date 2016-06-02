@@ -13,7 +13,6 @@
 	}
 
 	$rsp = messages_get_messages_by_number($number);
-
 	
 	#
 	# output
