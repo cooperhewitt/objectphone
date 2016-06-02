@@ -61,7 +61,11 @@
 			#}
 
 			## if not any of the above, log it, reply we are looking into it, then send a slack message
-			sms_output_error(404, "Hey thanks. I'm gonna log your message and see if we can find what you are looking for.");
+			$slack = array(
+				'sms' => $method,
+			);
+
+			sms_output_error(404, "Hey thanks. I'm gonna log your message and see if we can find what you are looking for.", $slack);
 		}
 
 		$method_row = $methods[$method];

@@ -4,6 +4,7 @@
 
 	loadlib("messages");
 	loadlib("deliveries");
+	loadlib("slack");
 
 	#################################################################
 
@@ -23,6 +24,14 @@
 		$more['is_error'] = 1;
 
 		### send to Slack ... 
+		
+		if (isset($more['sms'])){
+			$slack = array(
+				'channel' => '#ask',
+			);
+
+			slack($more['sms'], $slack);
+		}
 
 		sms_output_send($out, $more);
 	}

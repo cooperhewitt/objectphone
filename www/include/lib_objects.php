@@ -5,6 +5,20 @@
 
 	#################################################################
 
+	function objects_get_object_by_id($id){
+
+		return 1;
+	}
+
+	#################################################################
+
+	function objects_get_object_by_accession_number($accession){
+
+		return 1;
+	}
+
+	#################################################################
+
 	function objects_send_random_object($user){
 
 		$out = array();

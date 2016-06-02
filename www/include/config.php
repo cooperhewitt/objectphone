@@ -167,6 +167,9 @@
 	$GLOBALS['cfg']['twilio_api_token'] = 'READ-FROM-SECRETS';
 	$GLOBALS['cfg']['twilio_number'] = 'READ-FROM-SECRETS';
 
+	# slack
+
+	$GLOBALS['cfg']['slack_api_access_token'] = 'READ-FROM-SECRETS';
 
 	$GLOBALS['cfg']['sms'] = array(
 		'methods' => array(),
