@@ -1,5 +1,7 @@
 ## objectphone
 
+It's our API, on your phone. Object Phone is a simple app that uses Twilio to allow you to 'listen' to our collections metadata. I originally [posted a blog on Cooper-Hewitt Labs](http://labs.cooperhewitt.org/2013/object-phone/), but it has matured a bit since that post.
+
 ### version 2
 
 Version 2 of objectphone take a slightly more complex approach to the same simple problem of giving a voice to the Cooper Hewitt Collection. 
